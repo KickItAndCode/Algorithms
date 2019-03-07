@@ -6,6 +6,8 @@
 # The function should also be case sensitive, so that a string 'AAAaaa' returns 'A3a3'.
 
 import collections
+from nose.tools import assert_equal
+
 
 
 def compress (s):
@@ -60,3 +62,16 @@ def compress2(s):
     return "".join(result)
 
 print (compress('AAAAABBBBCCCC'))
+
+
+class TestCompress(object):
+
+    def test(self, sol):
+        assert_equal(sol(''), '')
+        assert_equal(sol('AABBCC'), 'A2B2C2')
+        assert_equal(sol('AAABCCDDDDD'), 'A3B1C2D5')
+        print 'ALL TEST CASES PASSED'
+
+# Run Tests
+t = TestCompress()
+t.test(compress)
