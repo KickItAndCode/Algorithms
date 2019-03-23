@@ -1,3 +1,4 @@
+from collections import deque
 
 # Root -> Left -> Right
 
@@ -10,16 +11,16 @@ def PreOrder (tree):
 
 def IterativePreOrder(tree):
     if tree:
-        stack = Stack()
-        stack.push(tree)
+        stack = deque()
+        stack.append(tree)
 
-        while stack.isEmpty() == False:
+        while stack.count > 0:
             curr = stack.pop()
             print(curr.getRootVal())
             if curr.rightChild is not None:
-                stack.push(curr.rightChild)
+                stack.append(curr.rightChild)
             if curr.leftChild is not None:
-                stack.push(curr.leftChild)
+                stack.append(curr.leftChild)
 
 
 # Left -> Right -> Root
@@ -31,18 +32,18 @@ def PostOrder (tree):
 
 def IterativePostOrder(tree):
     curr = tree
-    stack = Stack()
-    while curr is not None or  stack.isEmpty() == False:
+    stack = deque()
+    while curr is not None or  stack.count > 0:
         if curr:
-            stack.push(curr)
+            stack.append(curr)
             curr = curr.leftChild
         else:
-            temp = stack.peek().rightChild
+            temp = stack[-1].rightChild
             if temp is None:
                 temp = stack.pop()
                 print(temp.getRootVal())
 
-                while stack.isEmpty() == False and temp == stack.peek().rightChild:
+                while stack.count > 0 and temp == stack[-1].rightChild:
                     temp = stack.pop()
                     print(temp.getRootVal())
             else:
@@ -58,13 +59,13 @@ def InOrder(tree):
 
 def IterativeInOrder(tree):
     if tree:
-        stack = Stack()
+        stack = deque()
         while True:
             if tree:
-                stack.push(tree)
+                stack.append(tree)
                 tree = tree.leftChild
             else:
-                if stack.isEmpty():
+                if stack.count == 0:
                     break
                 else:
                     tree = stack.pop()

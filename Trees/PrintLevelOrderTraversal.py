@@ -8,7 +8,7 @@ class Node:
 
     queue = deque()
 
-def levelOrderPrint(tree):
+def levelOrder(tree):
     if tree is None:
         return
 
@@ -26,7 +26,7 @@ def levelOrderPrint(tree):
             queue = temp
 
 
-def levelOrder(self, root):
+def levelOrder2(self, root):
 
     levels = []
     if not root:
@@ -49,7 +49,9 @@ def levelOrder(self, root):
     helper(root, 0)
     return levels
 
-def levelOrder(self, root):
+"""
+"""
+def levelOrder3(self, root):
     if not root: return []
     queue, res = deque([root]), []
 
@@ -66,8 +68,53 @@ def levelOrder(self, root):
         res.append(cur_level)
     return res
 
+
+"""
+Level order printing with two queues
+Create two queues
+Initialize the first with root
+While both queues are not empty 
+pop from q1 and add its childen to the opposite queue
+then the same for q2
+each time a queue is empty you print a new line 
+"""
+
+def levelOrder4 (root):
+    if not root: return []
+    
+    q1, q2 = deque(), deque()
+    q1.append(root)
+
+    while len(q1) > 0 or len(q2) > 0:
+        while len(q1) > 0:
+           
+            curr = q1.pop()
+            print(curr.val, end='')
+
+            if curr.left:
+                q2.append(curr.left)
+            if curr.right:
+                q2.append(curr.right)    
+           
+        print('\n',end= '')
+
+        while len(q2) > 0:
+            curr = q2.pop()
+            print(curr.val, end = '')
+
+            if curr.left:
+                q1.append(curr.left)
+            if curr.right:
+                q1.append(curr.right)
+   
+        print('\n',end='')
+
+
 root = Node(2)
 root.left = Node(1)
 root.right = Node(3)
+root.right.left = Node(5)
+root.right.right = Node(7)
+root.right.left.left = Node(6)
 
-levelOrderPrint(root)
+levelOrder4(root)

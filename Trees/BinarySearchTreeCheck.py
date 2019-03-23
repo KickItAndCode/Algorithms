@@ -1,3 +1,4 @@
+import math
 # tree_vals = []
 #
 # def inorder(tree):
@@ -16,7 +17,7 @@
 class Node:
     def __init__(self, k, val):
         self.key = k
-        self.value = val
+        self.val = val
         self.left = None
         self.right = None
 
@@ -43,15 +44,26 @@ def verify(node):
         return False
 
 
+
+def IsBST(root, min, max):
+    if root is None:
+         return True
+    if root.val < min or root.val > max:
+        return False
+    
+    return IsBST(root.left, min, root.val) and IsBST(root.right, root.val, max)
+
+
 root= Node(10, "Hello")
 root.left = Node(5, "Five")
 root.right= Node(30, "Thirty")
 
-print(verify(root)) # prints True, since this tree is valid
+print(IsBST(root,float("-inf"), float("inf") )) # prints True, since this tree is valid
 
 root = Node(10, "Ten")
 root.right = Node(20, "Twenty")
 root.left = Node(5, "Five")
 root.left.right = Node(15, "Fifteen")
 
-print(verify(root)) # prints False, since 15 is to the left of 10
+# print(verify(root)) # prints False, since 15 is to the left of 10
+print(IsBST(root, -math.inf, math.inf)) 
