@@ -67,7 +67,7 @@ class TestBalanceCheck(object):
         assert_equal(sol('[](){([[[]]])}('),False)
         assert_equal(sol('[{{{(())}}}]((()))'),True)
         assert_equal(sol('[[[]])]'),False)
-        print 'ALL TEST CASES PASSED'
+        print  ('ALL TEST CASES PASSED')
 
 # Run Tests
 
