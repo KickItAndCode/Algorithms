@@ -6,4 +6,4 @@ def fact (n):
     else:
         return n * fact(n-1)
 
-fact(5)
+print (fact(5))
