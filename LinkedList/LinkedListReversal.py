@@ -34,18 +34,18 @@ def reverseList(head: Node) -> Node:
     return prev
 
 
-# def reverse(head):
-#     curr = head
-#     prev = None
-#     next = None
+def reverse(head):
+    curr = head
+    prev = None
+    next = None
 
-#     while curr:
+    while curr:
 
-#         next = curr.next
-#         curr.next = prev
-#         prev = curr
-#         curr = next
-#     return prev
+        next = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next
+    return prev
 
 
 # Create a list of 4 nodes

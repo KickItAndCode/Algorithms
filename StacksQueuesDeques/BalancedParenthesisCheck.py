@@ -4,14 +4,14 @@ from nose.tools import assert_equal
 def balance_check2(s):
 
     # Check is even number of brackets
-    if len(s)%2 != 0:
+    if len(s) % 2 != 0:
         return False
 
     # Set of opening brackets
     opening = set('([{')
 
     # Matching Pairs
-    matches = set([ ('(',')'), ('[',']'), ('{','}') ])
+    matches = set([('(', ')'), ('[', ']'), ('{', '}')])
 
     # Use a list as a "Stack"
     stack = []
@@ -33,13 +33,14 @@ def balance_check2(s):
             last_open = stack.pop()
 
             # Check if it has a closing match
-            if (last_open,paren) not in matches:
+            if (last_open, paren) not in matches:
                 return False
 
     return len(stack) == 0
 
+
 def balance_check(s):
-    open= ['[','(', '{']
+    open = ['[', '(', '{']
     close = [']', '}', ')']
     stack = []
     for c in s:
@@ -54,22 +55,22 @@ def balance_check(s):
     return len(stack) == 0
 
 
-balance_check('[]') #True
-balance_check('[](){([[[]]])}') #True
-balance_check('()(){]}') #False
-
-
+balance_check('[]')  # True
+balance_check('[](){([[[]]])}')  # True
+balance_check('()(){]}')  # False
 
 
 class TestBalanceCheck(object):
 
-    def test(self,sol):
-        assert_equal(sol('[](){([[[]]])}('),False)
-        assert_equal(sol('[{{{(())}}}]((()))'),True)
-        assert_equal(sol('[[[]])]'),False)
-        print  ('ALL TEST CASES PASSED')
+    def test(self, sol):
+        assert_equal(sol('[](){([[[]]])}('), False)
+        assert_equal(sol('[{{{(())}}}]((()))'), True)
+        assert_equal(sol('[[[]])]'), False)
+        print('ALL TEST CASES PASSED')
 
 # Run Tests
 
+
 t = TestBalanceCheck()
 t.test(balance_check)
+t.test(balance_check2)
