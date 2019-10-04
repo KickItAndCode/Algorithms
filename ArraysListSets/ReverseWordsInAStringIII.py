@@ -13,6 +13,8 @@
 
 # "take two"
 # "ekat owt"
+from nose.tools import assert_equal
+
 
 def reverseWords(self, s: str) -> str:
     list = s.split()
@@ -20,20 +22,20 @@ def reverseWords(self, s: str) -> str:
     return " ".join(newWords)
 
 
-def reverseWords(self, s: str) -> str:
+def reverseWords(s):
     new_s = ""
     start = 0
     for i in range(0, len(s)):
         if s[i] == " ":
-            new_s += self.reverse(s[start:i])+" "
+            new_s += reverse(s[start:i])+" "
             start = i+1
         elif i+1 == len(s):
-            new_s += self.reverse(s[start:i+1])
+            new_s += reverse(s[start:i+1])
 
     return(new_s)
 
 
-def reverse(self, word):
+def reverse(word):
     start = 0
     end = len(word)-1
     a = list(word)
@@ -44,3 +46,19 @@ def reverse(self, word):
         start += 1
         end -= 1
     return "".join(a)
+
+
+class TestReverse(object):
+
+    def test_rev(self, solution):
+        assert_equal(solution("Let's take LeetCode contest"),
+                     "s'teL ekat edoCteeL tsetnoc")
+        # assert_equal(solution('hello world'), 'dlrow olleh')
+        # assert_equal(solution('123456789'), '987654321')
+
+        print('PASSED ALL TEST CASES!')
+
+
+# Run Tests
+test = TestReverse()
+test.test_rev(reverseWords)

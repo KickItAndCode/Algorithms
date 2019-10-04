@@ -1,7 +1,7 @@
 from nose.tools import assert_equal
 
 
-def balance_check2(s):
+def balance_check(s):
 
     # Check is even number of brackets
     if len(s) % 2 != 0:
@@ -40,29 +40,41 @@ def balance_check2(s):
 
 
 def balance_check(s):
-    open = ['[', '(', '{']
-    close = [']', '}', ')']
+
+        # The stack to keep track of opening brackets.
     stack = []
-    for c in s:
-        if c in open:
-            stack.append(c)
-        else:
-            if len(stack) != 0:
-                stack.pop()
-            else:
+
+    # Hash map for keeping track of mappings. This keeps the code very clean.
+    # Also makes adding more types of parenthesis easier
+    mapping = {")": "(", "}": "{", "]": "["}
+
+    # For every bracket in the expression.
+    for char in s:
+
+            # If the character is an closing bracket
+        if char in mapping:
+
+                # Pop the topmost element from the stack, if it is non empty
+                # Otherwise assign a dummy value of '#' to the top_element variable
+            top_element = stack.pop() if stack else '#'
+
+            # The mapping for the opening bracket in our hash and the top
+            # element of the stack don't match, return False
+            if mapping[char] != top_element:
                 return False
+        else:
+            # We have an opening bracket, simply push it onto the stack.
+            stack.append(char)
 
-    return len(stack) == 0
-
-
-balance_check('[]')  # True
-balance_check('[](){([[[]]])}')  # True
-balance_check('()(){]}')  # False
+    # In the end, if the stack is empty, then we have a valid expression.
+    # The stack won't be empty for cases like ((()
+    return not stack
 
 
 class TestBalanceCheck(object):
 
     def test(self, sol):
+        assert_equal(sol('(]'), False)
         assert_equal(sol('[](){([[[]]])}('), False)
         assert_equal(sol('[{{{(())}}}]((()))'), True)
         assert_equal(sol('[[[]])]'), False)
@@ -73,4 +85,3 @@ class TestBalanceCheck(object):
 
 t = TestBalanceCheck()
 t.test(balance_check)
-t.test(balance_check2)
