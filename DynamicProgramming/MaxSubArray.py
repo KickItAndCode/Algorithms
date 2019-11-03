@@ -26,6 +26,16 @@ def maxSubArray(nums):
         maxSum = max(currSum, maxSum)
     return maxSum
 
+# Dynamic Programming version
+
+
+def maxSubArraydp(nums):
+    dp = [0] * len(nums)
+    dp[0] = nums[0]
+    for i in range(1, len(nums)):
+        dp[i] = max(dp[i-1] + nums[i], nums[i])
+    return max(dp)
+
 
 class MaxSubArrayTest (object):
 
@@ -36,4 +46,5 @@ class MaxSubArrayTest (object):
 
 # Run and test
 t = MaxSubArrayTest()
-t.test(maxSubArray)
+# t.test(maxSubArray)
+t.test(maxSubArraydp)

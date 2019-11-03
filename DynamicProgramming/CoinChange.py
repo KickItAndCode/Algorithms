@@ -18,24 +18,22 @@ With 1 coin being the minimum amount.
 """
 
 
-
 from nose.tools import assert_equal
 
 
-def rec_coin(target,coins):
+def rec_coin(target, coins):
 
-    #default value set to target
+    # default value set to target
     min_coins = target
 
-    #base case to check if target is in coin values list
+    # base case to check if target is in coin values list
     if target in coins:
         return target
 
-
     else:
 
-    # for every coin value that is <= my target value
-        for i in [c for c in coins if c<= target]:
+        # for every coin value that is <= my target value
+        for i in [c for c in coins if c <= target]:
 
             # add a coin count (1) + recursive call which is a new target - the current coin
             num_coins = 1 + rec_coin(target - i, coins)
@@ -46,14 +44,16 @@ def rec_coin(target,coins):
 
     return min_coins
 
-rec_coin(10,[1,5])
+
+rec_coin(10, [1, 5])
+
 
 def rec_coin_dynam(target, coins, known_results):
 
-    #default value
+    # default value
     min_coins = target
 
-    #base cases
+    # base cases
     if target in coins:
         known_results[target] = 1
         return 1
@@ -64,30 +64,60 @@ def rec_coin_dynam(target, coins, known_results):
 
     else:
         # for every coin value that is <= target
-        for i in [c for c in coins if c<=target]:
+        for i in [c for c in coins if c <= target]:
 
-            #recursive call adding a coin count and using the new target
+            # recursive call adding a coin count and using the new target
             num_coins = 1 + rec_coin_dynam(target - i, coins, known_results)
 
             if num_coins < min_coins:
                 min_coins = num_coins
 
-                #reset the known resulting
+                # reset the known resulting
                 known_results[target] = min_coins
-                
+
     return min_coins
 
-#
-#
+
+def coin_change2(target, coins):
+    amount = target + 1
+    dp = [float('inf')] * (amount)
+    dp[0] = 0
+
+    # loop over all values to target to build dp array
+    for i in range(1, target + 1):
+
+        # find best options for that position
+
+        # loop over each coin option
+        for coin in coins:
+            if coin <= i:
+                dp[i] = min(1 + dp[i - coin], dp[i])
+    return dp[target] if dp[target] < target else -1
+
+
+def coin_change(target, coins):
+    amount = target + 1
+    dp = [float('inf')] * (amount)
+    dp[0] = 0
+
+    for c in coins:
+        for amount in range(amount):
+            if c <= amount:
+                dp[amount] = min(1 + dp[amount - c], dp[amount])
+    return dp[target] if dp[target] != float("inf") else -1
+
+
 class TestCoins(object):
 
-    def check(self,solution):
-        coins = [1,5,10,25]
-        assert_equal(solution(45,coins),3)
-        assert_equal(solution(23,coins),5)
-        assert_equal(solution(74,coins),8)
-        print ('Passed all tests.')
+    def check(self, solution):
+        coins = [1, 5, 10, 25]
+        # assert_equal(solution(45, coins), 3)
+        # assert_equal(solution(23, coins), 5)
+        # assert_equal(solution(74, coins), 8)
+        assert_equal(solution(10, [1, 2, 3, 5]), 2)
+        print('Passed all tests.')
 # Run Test
 
+
 test = TestCoins()
-test.check(rec_coin)
+test.check(coin_change)
