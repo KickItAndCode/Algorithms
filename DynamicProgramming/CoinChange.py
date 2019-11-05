@@ -78,13 +78,12 @@ def rec_coin_dynam(target, coins, known_results):
     return min_coins
 
 
-def coin_change2(target, coins):
-    amount = target + 1
-    dp = [float('inf')] * (amount)
+def coin_change(amount, coins):
+    dp = [float('inf')] * (amount + 1)
     dp[0] = 0
 
     # loop over all values to target to build dp array
-    for i in range(1, target + 1):
+    for i in range(1, amount + 1):
 
         # find best options for that position
 
@@ -92,19 +91,7 @@ def coin_change2(target, coins):
         for coin in coins:
             if coin <= i:
                 dp[i] = min(1 + dp[i - coin], dp[i])
-    return dp[target] if dp[target] < target else -1
-
-
-def coin_change(target, coins):
-    amount = target + 1
-    dp = [float('inf')] * (amount)
-    dp[0] = 0
-
-    for c in coins:
-        for amount in range(amount):
-            if c <= amount:
-                dp[amount] = min(1 + dp[amount - c], dp[amount])
-    return dp[target] if dp[target] != float("inf") else -1
+    return dp[amount] if dp[amount] != float("inf") else -1
 
 
 class TestCoins(object):
@@ -115,6 +102,7 @@ class TestCoins(object):
         # assert_equal(solution(23, coins), 5)
         # assert_equal(solution(74, coins), 8)
         assert_equal(solution(10, [1, 2, 3, 5]), 2)
+        assert_equal(solution(11, [1, 2, 5]), 3)
         print('Passed all tests.')
 # Run Test
 

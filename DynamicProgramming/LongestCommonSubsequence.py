@@ -8,10 +8,20 @@
 
 
 def longestCommonSubsequence(str1, str2):
-    pass
+    dp = [[None] * (len(str2) + 1) for i in range(len(str1) + 1)]
+
+    for i in range(len(str1) + 1):
+        for j in range(len(str2) + 1):
+            if i == 0 or j == 0:
+                dp[i][j] = 0
+            elif str1[i-1] == str2[j-1]:
+                dp[i][j] = dp[i - 1][j-1] + 1  # diagonal
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+    return dp[-1][-1]
 
 
 print(longestCommonSubsequence("abcde", "ace"))  # 3 ace
 print(longestCommonSubsequence("abc", "abc"))  # 3 abc
 print(longestCommonSubsequence("abc", "def"))  # 0
-print(longestCommonSubsequence("ZXVVYZW", "XKYKZPW"))  # 3 XYZW
+print(longestCommonSubsequence("AGGTAB", "GXTXAYB"))  # 3 XYZW
