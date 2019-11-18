@@ -62,7 +62,23 @@
 from heapq import *
 
 
-def kSmallestPairs(nums1, nums2, k):
+def kSmallestPairs2(nums1, nums2, k):
+    heap = []
+    for n1 in nums1:
+        for n2 in nums2:
+            if len(heap) < k:
+                heappush(heap, (-n1-n2, [n1, n2]))
+            else:
+                # if the heap isn't empty and the first value is greater than the current sum of n1 + n2
+                if heap and -heap[0][0] > n1 + n2:
+                    heappop(heap)
+                    heappush(heap, (-n1-n2, [n1, n2]))
+                else:
+                    break
+    return [heappop(heap)[1] for _ in range(k) if heap]
+
+
+def kSmallestPairs1(nums1, nums2, k):
     # key sum value list of list for pairs
     if not nums1 and not nums2:
         return []
@@ -86,54 +102,8 @@ def kSmallestPairs(nums1, nums2, k):
                 break
             res.append(r)
     return res
-    # print(arr[:k])
-    # print arr[:len(arr) - k]
+
+# best solution
 
 
-def kSmallestPairs(self, nums1, nums2, k, heap=[]):
-    for n1 in nums1:
-        for n2 in nums2:
-            if len(heap) < k:
-                heapq.heappush(heap, (-n1-n2, [n1, n2]))
-            else:
-                if heap and -heap[0][0] > n1 + n2:
-                    heapq.heappop(heap)
-                    heapq.heappush(heap, (-n1-n2, [n1, n2]))
-                else:
-                    break
-    return [heapq.heappop(heap)[1] for _ in range(k) if heap]
-
-
-class Solution:
-
-    def kSmallestPairs(self, nums1, nums2, k):
-
-        if not nums1 or not nums2:
-            return []
-
-        visited = []
-        heap = []
-        output = []
-
-        heappush(heap, (nums1[0] + nums2[0], 0, 0))
-        visited.append((0, 0))
-
-        while len(output) < k and heap:
-
-            val = heappop(heap)
-            output.append((nums1[val[1]], nums2[val[2]]))
-
-            if val[1] + 1 < len(nums1) and (val[1] + 1, val[2]) not in visited:
-                heappush(heap, (nums1[val[1] + 1] +
-                                nums2[val[2]], val[1] + 1, val[2]))
-                visited.append((val[1] + 1, val[2]))
-
-            if val[2] + 1 < len(nums2) and (val[1], val[2] + 1) not in visited:
-                heappush(heap, (nums1[val[1]] +
-                                nums2[val[2] + 1], val[1], val[2] + 1))
-                visited.append((val[1], val[2] + 1))
-
-        return output
-
-
-kSmallestPairs([0], [2, 4, 6], 1)
+print(kSmallestPairs2([1, 7, 11], [2, 4, 6], 3))

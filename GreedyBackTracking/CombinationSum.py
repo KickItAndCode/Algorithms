@@ -26,4 +26,24 @@
 # ]
 
 
-def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+def combinationSum(candidates, target):
+    res = []
+    findCombinations(candidates, target, 0, [], res)
+    return res
+
+
+def findCombinations(candidates, target, index, path, res):
+
+    if target < 0:
+        return
+    if target == 0:
+        res.append(path)
+        return
+
+    for i in range(index, len(candidates)):
+        findCombinations(candidates, target -
+                         candidates[i], i, path + [candidates[i]], res)
+
+
+print(combinationSum([2, 3, 6, 7], 7))
+print(combinationSum([2, 3, 5], 8))

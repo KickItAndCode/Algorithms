@@ -32,3 +32,19 @@ def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
         return findIntersection(set1, set2)
     else:
         return findIntersection(set2, set1)
+
+# Fastest
+
+
+def intersection(nums1, nums2):
+
+    mySet = set(nums1)
+    iSet = set()
+    for num in nums2:
+        if num in mySet:
+            iSet.add(num)
+
+    return [x for x in iSet]
+
+
+print(intersection([1, 2, 2, 1], [2, 2]))  # [2]

@@ -22,15 +22,41 @@
 
 
 def maxAreaOfIsland(grid):
+    max_res = 0
+
+    # traverse matrix
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            # anytime we find an island we do dfs
+            if grid[i][j] == 1:
+                max_res = max(max_res, dfs(grid, i, j))
+
+    return max_res
 
 
-maxAreaOfIsland([[0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-                 [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
-                 [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]])
+def dfs(grid, i, j):
+    # make sure its in bounds
+    if i < 0 or i >= len(grid) or j < 0 or j >= len(grid[i]) or grid[i][j] == 0:
+        return 0
+
+    # flip to 0 to not count it again later
+    grid[i][j] = 0
+    count = 1
+
+    count += dfs(grid, i + 1, j)
+    count += dfs(grid, i - 1, j)
+    count += dfs(grid, i, j + 1)
+    count += dfs(grid, i, j - 1)
+    return count
+
+
+print(maxAreaOfIsland([[0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+                       [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                       [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
+                       [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+                       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+                       [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]]))
 
 # maxAreaOfIsland([[0,0,0,0,0,0,0,0]])

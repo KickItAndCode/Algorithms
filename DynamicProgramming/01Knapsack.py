@@ -71,4 +71,4 @@ wt = [3, 2, 1]
 capacity = 5
 val_length = len(val)
 # print(knapSack(capacity, wt, val, val_length))
-print(knapSack(5, [5, 3, 4, 2], [60, 50, 70, 30], 4))
+print(knapSack(5, [5, 3, 4, 2], [60, 50, 70, 30], 4))  # 80

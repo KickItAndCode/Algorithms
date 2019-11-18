@@ -33,5 +33,37 @@ def lengthOfLIS(nums):
 
     return max(dp)
 
+# return array of the subsequence
+
+
+def buildSequence(nums, dp, currIdx):
+    res = []
+    while currIdx is not None:
+        res.append(nums[currIdx])
+        currIdx = dp[currIdx]
+    return list(reversed(res))
+
+
+def lengthOfLIS2(nums):
+    sequeneces = [None] * len(nums)
+    lengths = [1] * len(nums)
+    maxLengthIdx = 0
+
+    for i in range(len(nums)):
+        currNum = nums[i]
+        for j in range(i):
+            otherNum = nums[j]
+            if otherNum < currNum and lengths[j] + 1 >= lengths[i]:
+                lengths[i] = lengths[j] + 1
+                sequeneces[i] = j
+        if lengths[i] >= lengths[maxLengthIdx]:
+            maxLengthIdx = i
+
+    return buildSequence(nums, sequeneces, maxLengthIdx)
+
 
 print(lengthOfLIS([-1, 3, 4, 5, 2, 2, 2, 2]))
+print(lengthOfLIS([5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35]))  # 6
+
+print(lengthOfLIS2([-1, 3, 4, 5, 2, 2, 2, 2]))
+print(lengthOfLIS2([5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35]))  # 6

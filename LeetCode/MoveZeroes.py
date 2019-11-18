@@ -52,6 +52,18 @@ def moveZeroes(nums):
     return nums
 
 
+def moveZeroes2(nums):
+    j = 0
+    for i in range(len(nums)):
+        if nums[i] != 0:
+            nums[j] = nums[i]
+            j += 1
+
+    for i in range(j, len(nums)):
+        nums[i] = 0
+    return nums
+
+
 class MoveZeroesTest(object):
 
     def test(self, sol):
@@ -63,3 +75,4 @@ class MoveZeroesTest(object):
 # Run and test
 t = MoveZeroesTest()
 t.test(moveZeroes)
+t.test(moveZeroes2)

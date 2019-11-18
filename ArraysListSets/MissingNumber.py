@@ -15,7 +15,7 @@
 # Your algorithm should run in linear runtime complexity. 
 # Could you implement it using only constant extra space complexity?
 
-# O(logN ) | O(n)
+# O(nlogN ) | O(n)
 def missingNumber(nums):
     nums.sort()
     rangeSet = set(range(len(nums)+ 1))
@@ -23,6 +23,14 @@ def missingNumber(nums):
     res = rangeSet - numsSet
     return  res.pop()
     
+# O(n ) | O(n)
+
+def missingNumber2(nums):
+    sum = 0
+    for i in nums:
+        sum += i
+    n = len(nums) +1
+    return (n * (n-1)//2) - sum
 
 """
 RUN THIS CELL TO TEST YOUR SOLUTION
@@ -39,4 +47,4 @@ class TestFinder(object):
 
 # Run test
 t = TestFinder()
-t.test(missingNumber)
+t.test(missingNumber2)

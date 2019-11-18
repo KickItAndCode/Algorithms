@@ -1,6 +1,24 @@
 from nose.tools import assert_equal
 
 
+def permuteGeeksForGeeks(s):
+
+    def permuteHelper(res, l, r):
+        if l == r:
+            print(''.join(res))
+
+        else:
+            for i in range(l, r + 1):
+                res[l], res[i] = res[i], res[l]
+                permuteHelper(res, l+1, r)
+                res[l], res[i] = res[i], res[l]
+
+    permuteHelper(list(s), 0, len(s) - 1)
+
+
+# permuteGeeksForGeeks("ABC")
+
+
 def permute(s):
     out = []
 
@@ -12,10 +30,11 @@ def permute(s):
             # for every permutation resulting from step 2 and 3
             for perm in permute(s[:i] + s[i + 1:]):
 
-                #print(f'curr letter is {let}')
-                #print(f'perm is {perm}')
+                # print(f'curr letter is {let}')
+                # print(f'perm is {perm}')
                 # add it to the output
                 out += [let+perm]
+                # print(f'Output is: {out}')
     return out
 
 
@@ -57,4 +76,4 @@ class TestPerm(object):
 
 # Run Tests
 t = TestPerm()
-t.test(permute2)
+t.test(permute)

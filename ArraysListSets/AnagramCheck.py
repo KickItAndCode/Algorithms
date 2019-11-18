@@ -1,5 +1,5 @@
 from nose.tools import assert_equal
-
+from collections import defaultdict
 # "public relations" is an anagram of "crap built on lies."
 # "clint eastwood" is an anagram of "old west action"
 
@@ -60,6 +60,24 @@ def anagram(s1, s2):
     return True
 
 
+def anagram2(s1, s2):
+    s1 = s1.replace(" ", "")
+    s2 = s2.replace(" ", "")
+
+    if len(s1) != len(s2):
+        return False
+
+    map = defaultdict(int)
+    for i in range(len(s1)):
+        map[s1[i]] += 1
+        map[s2[i]] -= 1
+
+    for k, v in map.items():
+        if v != 0:
+            return False
+    return True
+
+
 class AnagramTest(object):
 
     def test(self, sol):
@@ -74,4 +92,4 @@ class AnagramTest(object):
 
 # Run Tests
 t = AnagramTest()
-t.test(anagram)
+t.test(anagram2)
