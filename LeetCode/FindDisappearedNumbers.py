@@ -25,7 +25,7 @@ from nose.tools import assert_equal
 
 
 # Take the difference of two sets and the resulting list is the answer
-def findDisappearedNumbers(self, nums):
+def findDisappearedNumbers(nums):
     l = set(sorted(nums))
     u = range(1, len(nums)+1)
     if len(l) > 0:
@@ -34,12 +34,23 @@ def findDisappearedNumbers(self, nums):
         return []
 
 
+def findDisappearedNumbers2(nums):
+    missingNumbers = []
+    mySet = set(nums)
+    for i in range(1, len(nums) + 1):
+        if i not in mySet:
+            missingNumbers.append(i)
+    return missingNumbers
+
+
 class FindDisappearedNumbersTest (object):
     def test(self, sol):
         assert_equal(sol([4, 3, 2, 7, 8, 2, 3, 1]), [5, 6])
+        assert_equal(sol([1, 1]), [2])
         print("ALL TEST CASES PASSED")
 
 
 # Run and test
 t = FindDisappearedNumbersTest()
 t.test(findDisappearedNumbers)
+t.test(findDisappearedNumbers2)

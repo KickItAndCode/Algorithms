@@ -17,6 +17,21 @@ from nose.tools import assert_equal
 # Input: [2,2,1,1,1,2,2]
 # Output: 2
 
+from collections import Counter, defaultdict
+import operator
+
+
+def majorityElement(nums):
+    map = defaultdict(int)
+    for n in nums:
+        map[n] += 1
+    currMax = (float('-inf'), 0)
+
+    for k, v in map.items():
+        if v > currMax[1]:
+            currMax = (k, v)
+    return currMax[0]
+
 
 def majorityElement(nums):
     map = {}
@@ -34,10 +49,16 @@ def majorityElement(nums):
     return currMax[0]
 
 
+def majorityElement(nums):
+    map = Counter(nums)
+    return max(map.items(), key=operator.itemgetter(1))[0]
+
+
 class MajorityElementTest(object):
 
     def test(self, sol):
         assert_equal(sol([3, 2, 3]), 3)
+        assert_equal(sol([3, 3, 4]), 3)
         assert_equal(sol([2, 2, 1, 1, 1, 2, 2]), 2)
         print("ALL TEST CASES PASSED")
 

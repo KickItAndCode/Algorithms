@@ -48,6 +48,21 @@ def reverse(head):
     return prev
 
 
+def reverseWithDummy(head):
+    dummy = Node(-1)
+    stack = []
+    while head:
+        stack.append(head)
+        head = head.next
+
+    head = dummy
+    while stack:
+        curr = stack.pop()
+        head.next = Node(curr.val)
+        head = head.next
+    return dummy.next
+
+
 # Create a list of 4 nodes
 a = Node(1)
 b = Node(2)

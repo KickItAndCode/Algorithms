@@ -43,6 +43,22 @@ def maxProfit(prices):
     return profit
 
 
+def maxProfit(prices):
+
+    if not prices or len(prices) == 0:
+        return 0
+
+    profit = 0
+
+    for i in range(0, len(prices) - 1):
+        # if curr value is greater than the
+        #  previous value increase profit value
+        #  by the difference between them
+        if prices[i + 1] > prices[i]:
+            profit += prices[i + 1] - prices[i]
+    return profit
+
+
 class MaxProfitTest(object):
 
     def test(self, sol):

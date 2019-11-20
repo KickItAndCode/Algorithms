@@ -36,6 +36,24 @@ def isPalindrome(s):
     return char == char[::-1]
 
 
+def isPalindrome2(s):
+    i = 0
+    j = len(s) - 1
+
+    while i < j:
+        if i < j and not s[i].isalnum():
+            i += 1
+        elif i < j and not s[j].isalnum():
+            j -= 1
+
+        if i < j and s[i].lower() != s[j].lower():
+            return False
+        else:
+            i += 1
+            j -= 1
+    return True
+
+
 class IsPalindromeTest(object):
 
     def test(self, solution):
@@ -47,4 +65,5 @@ class IsPalindromeTest(object):
 
 # Run Tests
 t = IsPalindromeTest()
-t.test(isPalindrome)
+# t.test(isPalindrome)
+t.test(isPalindrome2)

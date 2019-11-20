@@ -42,7 +42,35 @@ def flipAndInvertImage2(A):
     return [[1 - i for i in i[::-1]] for i in A]
 
 
-print(flipAndInvertImage([[1, 1, 0], [1, 0, 1], [0, 0, 0]]))
+def flipAndInvertImage3(A):
+    # traverse verticall
+    for i in range(len(A)):
+        j = 0
+        k = len(A[i]) - 1
+        # reverse horizontal
+        while j < k:
+            A[i][k], A[i][j] = A[i][j], A[i][k]
+            j += 1
+            k -= 1
+
+        for j in range(len(A[i])):
+            A[i][j] = A[i][j] ^ 1  # if its 1 make it 0 if its 0 make it 1
+
+    return A
+
+
+def flipAndInvertImage4(A):
+    for row in A:
+        row.reverse()
+
+    n_rows, n_cols = len(A), len(A[0])
+    for row in range(0, n_rows):
+        for col in range(0, n_cols):
+            A[row][col] = A[row][col] ^ 1
+    return A
+
+
+print(flipAndInvertImage3([[1, 1, 0], [1, 0, 1], [0, 0, 0]]))
 # Output: [[1,0,0],[0,1,0],[1,1,1]]
 # Explanation: First reverse each row: [[0,1,1],[1,0,1],[0,0,0]].
 # Then, invert the image: [[1,0,0],[0,1,0],[1,1,1]]

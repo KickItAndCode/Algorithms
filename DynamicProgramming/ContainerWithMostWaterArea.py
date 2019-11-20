@@ -22,7 +22,8 @@ def maxArea(height):
     area, left, right = 0, 0, len(height) - 1
 
     while left < right:
-        area = max(area, min(height[right], height[left]) * (right - left))
+        currMin = min(height[right], height[left])
+        area = max(area,  currMin * (right - left))
         # update the walls of the container looking for larger walls
 
         if height[left] < height[right]:  # left wall is the smallest
