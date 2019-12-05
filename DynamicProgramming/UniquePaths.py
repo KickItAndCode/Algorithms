@@ -31,18 +31,18 @@
 def uniquePaths(m, n):
     # initialize a all zero array
     dp = [[0 for x in range(n)] for x in range(m)]
-       # set top row at 1's as there is only one direction it can go
-       for i in range(m):
-            dp[i][0] = 1
+    # set top row at 1's as there is only one direction it can go
+    for i in range(m):
+        dp[i][0] = 1
         # set left row vertically as 1 as it has only one direction it can go
-        for i in range(n):
-            dp[0][i] = 1
+    for i in range(n):
+        dp[0][i] = 1
 
-        # add the row above it and the side to calculate
-        for i in range(1, m):
-            for j in range(1, n):
-                dp[i][j] = dp[i-1][j] + dp[i][j-1]
-        return dp[m-1][n-1]
+    # add the row above it and the side to calculate
+    for i in range(1, m):
+        for j in range(1, n):
+            dp[i][j] = dp[i-1][j] + dp[i][j-1]
+    return dp[m-1][n-1]
 
 
 print(uniquePaths(3, 2))

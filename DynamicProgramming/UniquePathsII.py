@@ -36,13 +36,13 @@ def uniquePathsWithObstacles(obstacleGrid):
     for i in range(0, iLen):
         for j in range(0, jLen):
             if obstacleGrid[i][j] == 1:
-                dp[i][j] == 0
+                dp[i][j] = 0
             else:
-                if i-1 >= 0:
-                    dp[i][j] += dp[i-1][j]
-                if j-1 >= 0:
-                    dp[i][j] += dp[i][j-1]
-    return dp[-1][-1]
+                if i + 1 >= 0:
+                    dp[i][j] += dp[i+1][j]
+                if j + 1 >= 0:
+                    dp[i][j] += dp[i][j+1]
+    return dp[0][-1]
 
 
 print(uniquePathsWithObstacles([

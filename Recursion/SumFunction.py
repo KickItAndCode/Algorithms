@@ -15,4 +15,16 @@ def sum_func(n):
         return curr + sum_func(newN)
 
 
-print(sum_func(4321))
+def sum_func2(n):
+    res = 0
+    if n < 0:
+        n *= -1
+    while n > 0:
+        res += n % 10
+        n //= 10
+
+    return res
+
+
+# print(sum_func2(4321))
+print(sum_func2(-4321))

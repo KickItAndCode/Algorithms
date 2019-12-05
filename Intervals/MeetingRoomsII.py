@@ -28,13 +28,17 @@ def minMeetingRooms(intervals):
     for i in range(1, len(intervals)):
         curr = intervals[i]
         earliest = heappop(heap)
+        # we don't have a conflict
         if curr[0] >= earliest[1]:
             earliest[1] = curr[1]
+       # we have a conflict
         else:
             heappush(heap, curr)
 
+        # since we removed earlier we add it back
         heappush(heap, earliest)
 
+    # number of meeting rooms is the size of the heap
     return len(heap)
 
 

@@ -62,8 +62,9 @@ def lengthOfLIS2(nums):
     return buildSequence(nums, sequeneces, maxLengthIdx)
 
 
-print(lengthOfLIS([-1, 3, 4, 5, 2, 2, 2, 2]))
-print(lengthOfLIS([5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35]))  # 6
-
+# print(lengthOfLIS([16, 3, 5, 19, 10, 14, 12, 0, 15]))
+# print(lengthOfLIS([-1, 3, 4, 5, 2, 2, 2, 2]))
+# print(lengthOfLIS([5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35]))  # 6
+print(lengthOfLIS2([16, 3, 5, 19, 10, 14, 12, 0, 15]))
 print(lengthOfLIS2([-1, 3, 4, 5, 2, 2, 2, 2]))
 print(lengthOfLIS2([5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35]))  # 6

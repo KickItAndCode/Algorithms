@@ -44,7 +44,7 @@ def minPathSum(grid):
 
 
 # O(2*n) space
-def minPathSum2(self, grid):
+def minPathSum2(grid):
     if not grid:
         return
     r, c = len(grid), len(grid[0])
@@ -62,7 +62,7 @@ def minPathSum2(self, grid):
 # O(n) space
 
 
-def minPathSum(self, grid):
+def minPathSum(grid):
     if not grid:
         return
     r, c = len(grid), len(grid[0])
@@ -79,7 +79,7 @@ def minPathSum(self, grid):
 # change the grid itself
 
 
-def minPathSum4(self, grid):
+def minPathSum4(grid):
     if not grid:
         return
     r, c = len(grid), len(grid[0])

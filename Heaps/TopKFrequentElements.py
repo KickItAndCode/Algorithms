@@ -21,6 +21,8 @@
 # sort the map by value
 # return k number of items from the sorted list
 
+from collections import Counter, defaultdict
+
 
 def topKFrequent(nums, k):
     map = {}
@@ -34,4 +36,12 @@ def topKFrequent(nums, k):
     return(arr[:k])
 
 
-print(topKFrequent([1, 1, 1, 2, 2, 3], 2))
+def topKFrequentCounter(nums, k):
+    map = Counter(nums)
+    arr = sorted(map, key=map.get, reverse=True)
+    return (arr[:k])
+
+
+print(topKFrequent([1, 6, 2, 1, 6, 1], 2))
+print(topKFrequentCounter([1, 6, 2, 1, 6, 1], 2))
+# print(topKFrequent([1, 1, 1, 2, 2, 3], 2))
