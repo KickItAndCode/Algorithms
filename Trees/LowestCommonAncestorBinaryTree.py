@@ -52,3 +52,44 @@ class Solution:
             # return true if either of the three bool values is true
             return mid or left or right
         recurse_tree(root)
+        return self.res
+
+ def lowestCommonAncestor(self, root, p, q):
+        # escape condition
+        if (not root) or (root == p) or (root == q):
+            return root
+        # search left and right subtree
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        if left and right:
+            # both found, root is the LCA
+            return root
+        return left or right
+    
+def lowestCommonAncestor(self, root, p, q):
+    if root in (None, p, q): 
+        return root
+    
+    left, right = (self.lowestCommonAncestor(kid, p, q)
+                   for kid in (root.left, root.right))
+    return root if left and right else left or right
+
+
+def lowestCommonAncestor(self, root, p, q):
+    stack = [root]
+    parent = {root: None}
+    while p not in parent or q not in parent:
+        node = stack.pop()
+        if node.left:
+            parent[node.left] = node
+            stack.append(node.left)
+        if node.right:
+            parent[node.right] = node
+            stack.append(node.right)
+    ancestors = set()
+    while p:
+        ancestors.add(p)
+        p = parent[p]
+    while q not in ancestors:
+        q = parent[q]
+    return q

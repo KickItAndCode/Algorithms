@@ -43,6 +43,21 @@ def InOrderTraversalIterative(root):
 # Easier to understand involves a trick but is O(n)
 
 
+def InOrderTraversalIterative(root):
+    res = []
+    stack = [(root, False)]
+    while stack:
+        node, leftSubTreeTraversed = stack.pop()
+        if node:
+            if leftSubTreeTraversed:
+                res.append(node.val)
+            else:
+                stack.append((node.right, False))
+                stack.append((node, True))
+                stack.append((node.left, False))
+    return res
+
+
 def PostOrderTraversalIterative(root):
     stack = []
     visit = []

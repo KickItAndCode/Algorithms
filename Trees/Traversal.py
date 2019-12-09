@@ -2,11 +2,12 @@ from collections import deque
 
 # Root -> Left -> Right
 
-def PreOrder (tree):
-     if tree:
-         print(tree.getRootVal())
-         PreOrder(tree.getLeftChild())
-         PreOrder(tree.getRightChild())
+
+def PreOrder(tree):
+    if tree:
+        print(tree.getRootVal())
+        PreOrder(tree.getLeftChild())
+        PreOrder(tree.getRightChild())
 
 
 def IterativePreOrder(tree):
@@ -24,16 +25,17 @@ def IterativePreOrder(tree):
 
 
 # Left -> Right -> Root
-def PostOrder (tree):
+def PostOrder(tree):
     if tree:
         PostOrder(tree.getLeftChild())
         PostOrder(tree.getRightChild())
         print(tree.getRootVal())
 
+
 def IterativePostOrder(tree):
     curr = tree
     stack = deque()
-    while curr is not None or  stack.count > 0:
+    while curr or stack:
         if curr:
             stack.append(curr)
             curr = curr.leftChild
@@ -49,7 +51,9 @@ def IterativePostOrder(tree):
             else:
                 curr = temp
 
-#Left -> Root -> Right
+# Left -> Root -> Right
+
+
 def InOrder(tree):
     if tree:
         InOrder(tree.getLeftChild())
