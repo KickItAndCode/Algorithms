@@ -1,4 +1,4 @@
-# Max Path Sum In Binary Tree
+#  123 Max Path Sum In Binary Tree
 
 # Write a function that takes in a Binary Tree and returns its max path sum. A path is a collection of connected nodes where no node is connected to more than two other nodes
 # a path sum is the sum of the values of the nodes in a particular path. Each Binary Tree node has a value stored in a property called "value" and two children nodes stored in properties called "left" and "right," respectively. Children nodes can either be Binary Tree nodes themselves or the None (null) value.
@@ -19,15 +19,35 @@ class Solution(object):
         return self.max_so_far
 
     def helper(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
+
         if root == None:
             return 0
-        lresult = self.helper(root.left)  # Maximum sum starting from root.left
+        # Maximum sum starting from root.left
+        lresult = max(self.helper(root.left), 0)
+
+        # Maximum sum starting from root.left
+        rresult = max(self.helper(root.right), 0)
+
+        self.max_so_far = max(lresult + rresult + root.val, self.max_so_far)
+
+        # Return maximum sum starting from root
+        return max(lresult, rresult) + root.val
+
+    def maxPathSum(self, root):
+        self.max_so_far = float('-inf')
+        self.helper(root)  # Maximum sum starting from root
+        return self.max_so_far
+
+    def helper(self, root):
+
+        if root == None:
+            return 0
+        # Maximum sum starting from root.left
+        lresult = self.helper(root.left)
+
         # Maximum sum starting from root.left
         rresult = self.helper(root.right)
+
         self.max_so_far = max(
             max(lresult, 0) + max(rresult, 0) + root.val, self.max_so_far)
         # Return maximum sum starting from root

@@ -21,19 +21,6 @@ class Node:
         self.next = None
 
 
-def reverseList(head: Node) -> Node:
-    curr = head
-    prev = None
-    next = None
-
-    while curr:
-        next = curr.next
-        curr.next = prev
-        prev = curr
-        curr = next
-    return prev
-
-
 def reverse(head):
     curr = head
     prev = None
@@ -46,6 +33,16 @@ def reverse(head):
         prev = curr
         curr = next
     return prev
+
+
+def reverseAlgoExpert(head):
+    p1, p2 = None, head
+    while p2:
+        p3 = p2.next
+        p2.next = p1
+        p1 = p2
+        p2 = p3
+    return p1
 
 
 def reverseWithDummy(head):

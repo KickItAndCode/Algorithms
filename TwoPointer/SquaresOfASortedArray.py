@@ -1,4 +1,3 @@
-
 # 977. Squares of a Sorted Array
 # Given an array of integers A sorted in non-decreasing order, return an array of the squares of each number, also in sorted non-decreasing order.
 
@@ -21,6 +20,20 @@ def sortedSquares(self, A: List[int]) -> List[int]:
 
 # Time O(N) | O(N) space
 # sliding window approach
+
+
+def sortedSquares(self, A):
+    answer = collections.deque()
+    l, r = 0, len(A) - 1
+    while l <= r:
+        left, right = abs(A[l]), abs(A[r])
+        if left > right:
+            answer.appendleft(left * left)
+            l += 1
+        else:
+            answer.appendleft(right * right)
+            r -= 1
+    return list(answer)
 
 
 def sortedSquares(self, A):

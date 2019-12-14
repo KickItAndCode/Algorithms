@@ -66,13 +66,6 @@ class Solution:
             return root
         return left or right
     
-def lowestCommonAncestor(self, root, p, q):
-    if root in (None, p, q): 
-        return root
-    
-    left, right = (self.lowestCommonAncestor(kid, p, q)
-                   for kid in (root.left, root.right))
-    return root if left and right else left or right
 
 
 def lowestCommonAncestor(self, root, p, q):
@@ -93,3 +86,12 @@ def lowestCommonAncestor(self, root, p, q):
     while q not in ancestors:
         q = parent[q]
     return q
+
+
+def lowestCommonAncestor(self, root, p, q):
+    if root in (None, p, q): 
+        return root
+    
+    left, right = (self.lowestCommonAncestor(kid, p, q)
+                   for kid in (root.left, root.right))
+    return root if left and right else left or right
