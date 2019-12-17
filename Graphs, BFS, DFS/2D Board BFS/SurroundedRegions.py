@@ -24,26 +24,6 @@
 from collections import deque
 
 
-def solve1(board):
-    if not any(board):
-        return
-
-    m, n = len(board), len(board[0])
-
-    # gets every value that is on the edge rows along the boundary
-    save = [(i, j) for k in range(max(m, n))
-            for (i, j) in ((0, k), (m-1, k), (k, 0), (k, n-1))]
-
-    while save:
-        i, j = save.pop()
-        if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
-            board[i][j] = 'S'
-            save.extend([(i-1, j), (i+1, j), (i, j-1), (i, j+1)])
-    # Phase 2: Change every 'S' on the board to 'O' and everything else to 'X'.
-    board[:] = [['X' if c != 'S' else "O" for c in row] for row in board]
-    return board
-
-
 def solve(board):
     queue = deque([])
 
@@ -67,6 +47,25 @@ def solve(board):
                 board[r][c] = "X"
             elif board[r][c] == "D":
                 board[r][c] = "O"
+
+
+def solve1(board):
+    if not any(board):
+        return
+
+    m, n = len(board), len(board[0])
+
+    # gets every value that is on the edge rows along the boundary
+    save = [(i, j) for k in range(max(m, n))
+            for (i, j) in ((0, k), (m-1, k), (k, 0), (k, n-1))]
+
+    while save:
+        i, j = save.pop()
+        if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
+            board[i][j] = 'S'
+            save.extend([(i-1, j), (i+1, j), (i, j-1), (i, j+1)])
+    # Phase 2: Change every 'S' on the board to 'O' and everything else to 'X'.
+    board[:] = [['X' if c != 'S' else "O" for c in row] for row in board]
     return board
 
 

@@ -10,6 +10,24 @@
 # If you have figured out the O(n) solution, try coding another solution of which the time complexity is O(n log n).
 
 
+# easy to understand sliding window
+def smallestSubarray(s, nums):
+    start = 0
+    minSize = float("inf")
+    currWindowSum = 0
+    for end in range(len(nums)):
+        currWindowSum += nums[end]
+        # we can shrink window
+        while currWindowSum >= s:
+            # update min
+            minSize = min(minSize, end-start + 1)
+            # substract from start of the window
+            currWindowSum -= nums[start]
+            # move window start over
+            start += 1
+    return minSize
+
+
 def minSubArrayLen(s, nums):
     curr_min = float('inf')
     curr = 0
@@ -26,6 +44,7 @@ def minSubArrayLen(s, nums):
     return curr_min
 
 
+# using sliding window O(N)
 def minSubArrayLen(s, nums):
     if not nums:
         return 0
@@ -45,4 +64,4 @@ def minSubArrayLen(s, nums):
     return curr_min if curr_min != float('inf') else 0
 
 
-print(minSubArrayLen(7, [2, 3, 1, 2, 4, 3]))  # 2 ([4,3])
+print(smallestSubarray(7, [2, 3, 1, 2, 4, 3]))  # 2 ([4,3])
