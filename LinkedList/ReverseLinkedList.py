@@ -8,10 +8,6 @@
 
 # A linked list can be reversed either iteratively or recursively. Could you implement both?
 
-
-# from Node import *
-
-
 from nose.tools import assert_equal
 
 
@@ -21,13 +17,16 @@ class Node:
         self.next = None
 
 
-def reverse(head):
+def reverseList(head):
+    """
+    Reverse a linked list iteratively.
+    Time: O(n), Space: O(1)
+    """
     curr = head
     prev = None
     next = None
 
     while curr:
-
         next = curr.next
         curr.next = prev
         prev = curr
@@ -36,6 +35,10 @@ def reverse(head):
 
 
 def reverseAlgoExpert(head):
+    """
+    Alternative iterative approach to reverse a linked list.
+    Time: O(n), Space: O(1)
+    """
     p1, p2 = None, head
     while p2:
         p3 = p2.next
@@ -46,6 +49,10 @@ def reverseAlgoExpert(head):
 
 
 def reverseWithDummy(head):
+    """
+    Reverse a linked list using a dummy node and stack.
+    Time: O(n), Space: O(n)
+    """
     dummy = Node(-1)
     stack = []
     while head:
@@ -60,23 +67,42 @@ def reverseWithDummy(head):
     return dummy.next
 
 
-# Create a list of 4 nodes
-a = Node(1)
-b = Node(2)
-c = Node(3)
-d = Node(4)
+def create_test_list():
+    """Create a test linked list: 1->2->3->4"""
+    a = Node(1)
+    b = Node(2)
+    c = Node(3)
+    d = Node(4)
+    a.next = b
+    b.next = c
+    c.next = d
+    return a
 
-# Set up order a,b,c,d with vals 1,2,3,4
-a.next = b
-b.next = c
-c.next = d
-print(a.next.val)
-print(b.next.val)
-print(c.next.val)
-#
-reverseList(a)
-#
-#
-# print(d.next.val)
-# print(c.next.val)
-# print(b.next.val)
+
+def verify_reversed_list(reversed_list):
+    """Verify the list is properly reversed"""
+    assert_equal(reversed_list.val, 4)
+    assert_equal(reversed_list.next.val, 3)
+    assert_equal(reversed_list.next.next.val, 2)
+    assert_equal(reversed_list.next.next.next.val, 1)
+
+
+# Test all reverse functions
+test_list = create_test_list()
+verify_reversed_list(reverseList(test_list))
+
+test_list = create_test_list()
+verify_reversed_list(reverseAlgoExpert(test_list))
+
+test_list = create_test_list()
+verify_reversed_list(reverseWithDummy(test_list))
+
+# Visualization for the first method
+test_list = create_test_list()
+print("Original list: 1->2->3->4")
+print("Reversed list:", end=" ")
+curr = reverseList(test_list)
+while curr:
+    print(curr.val, end="->")
+    curr = curr.next
+print("NULL")
